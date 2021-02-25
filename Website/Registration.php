@@ -1,0 +1,20 @@
+<?php
+session_start();
+include('DBConnection.php');
+$name=$_POST['name'];
+$gender=$_POST['gender'];
+$profile=$_FILES['profile'];
+$email=$_POST['email'];
+$contact=$_POST['contact'];
+$address=$_POST['address'];
+$state=$_POST['state'];
+$city=$_POST['city'];
+$pincode=$_POST['pincode'];
+$username=$_POST['username'];
+$password=$_POST['password'];
+move_uploaded_file($profile['tmp_name'],"Profiles/".$profile['name']);
+$query='insert into users (u_name,u_gender,u_profile,u_email,u_contact,u_address,u_pincode,u_state,u_city,u_username,u_password) values ("'.$name.'","'.$gender.'","'.$profile['name'].'","'.$email.'","'.$contact.'","'.$address.'","'.$pincode.'","'.$state.'","'.$city.'","'.$username.'","'.$password.'")';
+mysqli_query($con,$query);
+$_SESSION['username']=$username;
+header('location:Index.php');
+?>
